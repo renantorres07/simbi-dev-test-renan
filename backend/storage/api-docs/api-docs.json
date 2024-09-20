@@ -7,9 +7,7 @@
     "paths": {
         "/api/authors": {
             "post": {
-                "tags": [
-                    "Authors"
-                ],
+                "tags": ["Authors"],
                 "summary": "Adiciona um novo autor na API",
                 "description": "Permite adicionar um autor",
                 "operationId": "1f4827c47725ae88eac52beb263f9af4",
@@ -18,10 +16,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "firstName",
-                                    "lastName"
-                                ],
+                                "required": ["firstName", "lastName"],
                                 "properties": {
                                     "firstName": {
                                         "type": "string"
@@ -113,9 +108,7 @@
         },
         "/api/books": {
             "get": {
-                "tags": [
-                    "Books"
-                ],
+                "tags": ["Books"],
                 "summary": "Lista todos os livros cadastrados na API",
                 "description": "Lista todos os livros cadastrados.",
                 "operationId": "6b187b4abb5fb71e8505f3ac73313cc8",
@@ -211,9 +204,7 @@
                 }
             },
             "post": {
-                "tags": [
-                    "Books"
-                ],
+                "tags": ["Books"],
                 "summary": "Adiciona um novo livro na API",
                 "description": "Permite adicionar um novo livro",
                 "operationId": "0ed456e5e5823be8d576d3c58547755b",
@@ -222,10 +213,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "firstName",
-                                    "lastName"
-                                ],
+                                "required": ["firstName", "lastName"],
                                 "properties": {
                                     "title": {
                                         "type": "string"
@@ -331,11 +319,209 @@
                 }
             }
         },
+        "/api/loans": {
+            "get": {
+                "tags": ["Loans"],
+                "summary": "Lista todos os empréstimos cadastrados na API",
+                "description": "Lista todos os empréstimos cadastrados.",
+                "operationId": "da1da231dd673e1cd157ba27ce4f70c9",
+                "responses": {
+                    "200": {
+                        "description": "Loans list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "31c35de6-4d7f-65a7-2da9-8abcf3c44357"
+                                        },
+                                        "book": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "13b35be6-65a7-4d7f-9ad2-8caaf3c75344"
+                                                },
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Book X"
+                                                },
+                                                "publisher": {
+                                                    "type": "string",
+                                                    "example": "Publisher Y"
+                                                },
+                                                "author": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "example": "13b35be6-65a7-4d7f-9ad2-8caaf3c75344"
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Autor Y"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "loanDate": {
+                                            "type": "string",
+                                            "example": "2022-12-14"
+                                        },
+                                        "returnDate": {
+                                            "type": "string",
+                                            "example": "2022-12-21"
+                                        },
+                                        "returnedAt": {
+                                            "type": "string",
+                                            "example": "2022-12-21"
+                                        },
+                                        "lastRenewedAt": {
+                                            "type": "string",
+                                            "example": "2022-12-21"
+                                        },
+                                        "renewalCount": {
+                                            "type": "number",
+                                            "example": 0
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "active"
+                                        },
+                                        "createdAt": {
+                                            "type": "string",
+                                            "example": "2022-12-14T22:24:26+00:00"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string",
+                                            "example": "2022-12-14T22:24:26+00:00"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Loans"],
+                "summary": "Adiciona um novo empréstimo na API",
+                "description": "Permite adicionar um novo empréstimo",
+                "operationId": "bf75f8441c0b3e6818b9a5a48f2e512a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": ["bookId"],
+                                "properties": {
+                                    "bookId": {
+                                        "type": "string"
+                                    },
+                                    "loanDate": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "returnDate": {
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Loan Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "31c35de6-4d7f-65a7-2da9-8abcf3c44357"
+                                        },
+                                        "bookId": {
+                                            "type": "string",
+                                            "example": "13b35be6-65a7-4d7f-9ad2-8caaf3c75344"
+                                        },
+                                        "loanDate": {
+                                            "type": "string",
+                                            "example": "2022-12-14"
+                                        },
+                                        "returnDate": {
+                                            "type": "string",
+                                            "example": "2022-12-21"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "active"
+                                        },
+                                        "createdAt": {
+                                            "type": "string",
+                                            "example": "2022-12-14T22:24:26+00:00"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string",
+                                            "example": "2022-12-14T22:24:26+00:00"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Requisição com erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Bad Request"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Proibido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Forbidden Error"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthorized Error"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Internal server error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/health": {
             "get": {
-                "tags": [
-                    "Health Check"
-                ],
+                "tags": ["Health Check"],
                 "summary": "Mostra o status dos serviços do sistema.",
                 "description": "Mostra o status dos serviços do sistema",
                 "operationId": "9670d4703d537cde38734b096d9d24cd",
@@ -402,9 +588,7 @@
         },
         "/ping": {
             "get": {
-                "tags": [
-                    "Health Check"
-                ],
+                "tags": ["Health Check"],
                 "summary": "Retorna pong se a aplicação está online.",
                 "description": "Verifica se a aplicação está online",
                 "operationId": "70f9c97fbd23b238c975f48804df8398",
@@ -424,9 +608,7 @@
         },
         "/api/authors/{id}/books": {
             "get": {
-                "tags": [
-                    "Authors"
-                ],
+                "tags": ["Authors"],
                 "summary": "Lista todos os livros cadastrados na API para um determinado autor",
                 "description": "Lista todos os livros cadastrados por um determinado autor.",
                 "operationId": "05e289382ad925246b99df38487e708f",
@@ -606,6 +788,48 @@
                     }
                 },
                 "type": "object"
+            },
+            "responses": {
+                "400": {
+                    "description": "Requisição com erro",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Bad Request"
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "Proibido",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Forbidden Error"
+                            }
+                        }
+                    }
+                },
+                "403": {
+                    "description": "Não autorizado",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Unauthorized Error"
+                            }
+                        }
+                    }
+                },
+                "500": {
+                    "description": "Erro interno",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Internal server error"
+                            }
+                        }
+                    }
+                }
             }
         }
     },
@@ -617,6 +841,10 @@
         {
             "name": "Books",
             "description": "Books"
+        },
+        {
+            "name": "Loans",
+            "description": "Loans"
         },
         {
             "name": "Health Check",
